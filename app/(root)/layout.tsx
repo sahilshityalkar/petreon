@@ -1,6 +1,8 @@
 import '../globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { ClerkProvider } from '@clerk/nextjs'
+
 const inter = Inter({ subsets:['latin']})
 export const metadata = {
   title: 'Next.js',
@@ -13,8 +15,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+    <ClerkProvider>
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <h1>hello pet's</h1>
+      </body>
     </html>
+    </ClerkProvider>
   )
 }
