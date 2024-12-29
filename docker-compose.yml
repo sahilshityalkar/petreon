@@ -1,0 +1,35 @@
+
+services:
+  backend:
+    build:
+      context: ./apps/backend 
+    ports:
+      - "5000:5000" 
+    env_file:
+      - ./apps/backend/.env 
+    depends_on:
+      - mongodb 
+
+  frontend:
+    build:
+      context: ./apps/frontend 
+    ports:
+      - "3000:3000" 
+    env_file:
+      - ./apps/frontend/.env 
+    depends_on:
+      - backend 
+
+  mongodb:
+    image: mongo:5.0 
+    container_name: mongodb 
+    ports:
+      - "27017:27017" 
+    volumes:
+      - mongodb_data:/data/db 
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root 
+      MONGO_INITDB_ROOT_PASSWORD: password 
+
+volumes:
+  mongodb_data: 
